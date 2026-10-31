@@ -1,0 +1,108 @@
+<?php
+// Memulai session & menyimpan pilihan bahasa di $_SESSION['bahasa']
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+if (!isset($_SESSION['bahasa'])) {
+    $_SESSION['bahasa'] = 'id';   // bahasa default
+}
+
+$kamus = [
+    'id' => [
+        'judul_app'   => 'Katalog Buku',
+        'login'       => 'Masuk',
+        'logout'      => 'Keluar',
+        'username'    => 'Nama Pengguna',
+        'password'    => 'Kata Sandi',
+        'halo'        => 'Halo',
+        'daftar'      => 'Daftar Buku',
+        'tambah'      => 'Tambah Buku',
+        'edit'        => 'Ubah Buku',
+        'hapus'       => 'Hapus',
+        'ubah'        => 'Ubah',
+        'simpan'      => 'Simpan',
+        'batal'       => 'Batal',
+        'aksi'        => 'Aksi',
+        'no'          => 'No',
+        'isbn'        => 'ISBN',
+        'judul'       => 'Judul',
+        'penulis'     => 'Penulis',
+        'penerbit'    => 'Penerbit',
+        'tahun'       => 'Tahun Terbit',
+        'kategori'    => 'Kategori',
+        'stok'        => 'Stok',
+        'pilih'       => '-- Pilih --',
+        'cari'        => 'Cari judul / penulis...',
+        'tombol_cari' => 'Cari',
+        'kosong'      => 'Belum ada data buku.',
+        'konfirmasi'  => 'Yakin ingin menghapus buku ini?',
+        'sukses_tambah' => 'Buku berhasil ditambahkan.',
+        'sukses_ubah'   => 'Data buku berhasil diubah.',
+        'sukses_hapus'  => 'Buku berhasil dihapus.',
+        'login_gagal'   => 'Nama pengguna atau kata sandi salah.',
+        'login_kosong'  => 'Nama pengguna dan kata sandi wajib diisi.',
+        'err_wajib'     => 'wajib diisi.',
+        'err_isbn'      => 'ISBN harus 10 atau 13 digit angka.',
+        'err_isbn_ganda'=> 'ISBN sudah terdaftar.',
+        'err_tahun'     => 'Tahun terbit harus antara 1900 dan tahun sekarang.',
+        'err_stok'      => 'Stok harus bilangan bulat 0 atau lebih.',
+        'err_kategori'  => 'Kategori tidak valid.',
+        'err_csrf'      => 'Token keamanan tidak valid. Muat ulang halaman.',
+        'tdk_ditemukan' => 'Data buku tidak ditemukan.',
+        'bahasa'        => 'Bahasa',
+        'Fiksi' => 'Fiksi', 'Non-Fiksi' => 'Non-Fiksi', 'Sains' => 'Sains',
+        'Teknologi' => 'Teknologi', 'Sejarah' => 'Sejarah', 'Lainnya' => 'Lainnya',
+    ],
+    'en' => [
+        'judul_app'   => 'Book Catalog',
+        'login'       => 'Sign In',
+        'logout'      => 'Sign Out',
+        'username'    => 'Username',
+        'password'    => 'Password',
+        'halo'        => 'Hello',
+        'daftar'      => 'Book List',
+        'tambah'      => 'Add Book',
+        'edit'        => 'Edit Book',
+        'hapus'       => 'Delete',
+        'ubah'        => 'Edit',
+        'simpan'      => 'Save',
+        'batal'       => 'Cancel',
+        'aksi'        => 'Actions',
+        'no'          => 'No',
+        'isbn'        => 'ISBN',
+        'judul'       => 'Title',
+        'penulis'     => 'Author',
+        'penerbit'    => 'Publisher',
+        'tahun'       => 'Year Published',
+        'kategori'    => 'Category',
+        'stok'        => 'Stock',
+        'pilih'       => '-- Select --',
+        'cari'        => 'Search title / author...',
+        'tombol_cari' => 'Search',
+        'kosong'      => 'No book data yet.',
+        'konfirmasi'  => 'Are you sure you want to delete this book?',
+        'sukses_tambah' => 'Book added successfully.',
+        'sukses_ubah'   => 'Book updated successfully.',
+        'sukses_hapus'  => 'Book deleted successfully.',
+        'login_gagal'   => 'Incorrect username or password.',
+        'login_kosong'  => 'Username and password are required.',
+        'err_wajib'     => 'is required.',
+        'err_isbn'      => 'ISBN must be 10 or 13 digits.',
+        'err_isbn_ganda'=> 'ISBN is already registered.',
+        'err_tahun'     => 'Year must be between 1900 and the current year.',
+        'err_stok'      => 'Stock must be an integer, 0 or more.',
+        'err_kategori'  => 'Invalid category.',
+        'err_csrf'      => 'Invalid security token. Please reload the page.',
+        'tdk_ditemukan' => 'Book not found.',
+        'bahasa'        => 'Language',
+        'Fiksi' => 'Fiction', 'Non-Fiksi' => 'Non-Fiction', 'Sains' => 'Science',
+        'Teknologi' => 'Technology', 'Sejarah' => 'History', 'Lainnya' => 'Other',
+    ],
+];
+
+// Fungsi terjemahan: t('kunci') -> teks sesuai bahasa di session
+function t($kunci) {
+    global $kamus;
+    $b = $_SESSION['bahasa'];
+    return $kamus[$b][$kunci] ?? $kunci;
+}
